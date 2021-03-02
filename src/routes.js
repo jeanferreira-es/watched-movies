@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
@@ -9,12 +9,17 @@ import HomeScreen from './pages/HomeScreen';
 import MovieScreen from './pages/MovieScreen';
 import SerieScreen from './pages/SerieScreen';
 import SharedScreen from './pages/SharedScreen';
-import styled from 'styled-components';
+
+import ConfigContext from './contexts/config';
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function Routes(){
+    const { theme } = useContext(ConfigContext);
+
     return (
+        <>
+        <StatusBar barStyle={theme.statusBarStyle} backgroundColor={theme.statusBarColor}/>
         <NavigationContainer>
             <Tab.Navigator
                 initialRouteName='Home'
@@ -64,7 +69,7 @@ export default function Routes(){
 
                 <Tab.Screen 
                     name='Shared' 
-                    component={SerieScreen}
+                    component={SharedScreen}
                     options={{
                         title: 'Indicados',
                         tabBarIcon: ({ focused }) => (
@@ -76,6 +81,7 @@ export default function Routes(){
                 />
             </Tab.Navigator>
         </NavigationContainer>
+        </>
     )
 }
 
