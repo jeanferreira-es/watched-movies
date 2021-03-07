@@ -1,14 +1,20 @@
-import React from 'react';
-import { FlatList } from 'react-native';
-import { Container } from './styles';
+import React, { useEffect, useContext } from 'react';
+import { Box, Container } from './styles';
+import { Text } from '../../styles/general';
 
-export default function index() {
-    
+import ConfigContext from '../../contexts/config';
+
+export default function index({ movie }) {
+    const { theme } = useContext(ConfigContext);
+
     return(
-        <Container>
-            <FlatList
-                data={}
-            />
+        <Container style={{ backgroundColor: theme.cardColor}}>
+            <Box capa>
+
+            </Box>
+            <Box details>
+                <Text style={{ color: theme.textColor }}>{movie.title}</Text>
+            </Box>
         </Container>
     )
 }

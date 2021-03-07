@@ -23,6 +23,7 @@ export const ConfigProvider = ({ children }) => {
             textColor: darkMode ? colors.white : colors.black,
             subTextColor: darkMode ? colors.white50 : colors.black50,
             iconColor: darkMode ? colors.white50 : colors.black50,
+            barColor: darkMode ? colors.white25 : colors.black25,
             statusBarColor: darkMode ? colors.black : colors.gray,
             statusBarStyle: darkMode ? 'light-content' : 'dark-content'
         });
