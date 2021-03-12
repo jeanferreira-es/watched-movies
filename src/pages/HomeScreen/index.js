@@ -2,14 +2,14 @@ import React, { useEffect, useContext } from 'react';
 import { Text, ScrollView } from 'react-native';
 import { Box, Container } from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
+import { Button } from '../../styles/general';
 import colors from '../../styles/colors';
 
 import ConfigContext from '../../contexts/config';
-import List from '../../components/List';
-import { Button } from '../../styles/general';
-import { color } from 'react-native-reanimated';
+import List from '../../components/ListComponent';
+import Header from '../../components/HeaderComponent';
 
-function Header({ iconName, title, color }) {
+function Title({ iconName, title, color }) {
     const { theme } = useContext(ConfigContext);
 
     return (
@@ -31,29 +31,30 @@ function Header({ iconName, title, color }) {
     )
 }
 
-export default function index(){
-    const { darkMode, setDarkMode, theme } = useContext(ConfigContext);
+export default function index({ navigation }){
+    const { theme } = useContext(ConfigContext);
 
     return(
         <Container style={{ backgroundColor: theme.backgroundColor }}>
-            <ScrollView>
+            <ScrollView style={{ paddingBottom: 100}}>
+            <Header navigation={navigation} showSearch='none'/>
                 <Box main>
-                    <Header iconName='pause' title='Não finalizados' color={colors.yellow}/>
+                    <Title iconName='pause' title='Não finalizados' color={colors.yellow}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Não há nada na lista'/>
 
                 <Box main>
-                    <Header iconName='play' title='Não assistido' color={colors.blue}/>
+                    <Title iconName='play' title='Não assistido' color={colors.blue}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Nessa também não tem'/>
 
                 <Box main>
-                    <Header iconName='heart' title='Favoritos' color={colors.red}/>
+                    <Title iconName='heart' title='Favoritos' color={colors.red}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Nessa também não tem'/>
 
                 <Box main>
-                    <Header iconName='check' title='Assistidos' color={colors.green}/>
+                    <Title iconName='check' title='Assistidos' color={colors.green}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Nessa também não tem'/>
             </ScrollView>

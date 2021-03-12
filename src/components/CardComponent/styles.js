@@ -7,7 +7,7 @@ export const Container = styled.View`
     width: 300px;
     height: 160px;
     margin-right: 25px;
-    elevation: 4px;
+    elevation: 4;
     margin: 7px;
 `;
 

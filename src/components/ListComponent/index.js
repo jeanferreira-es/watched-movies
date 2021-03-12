@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Container } from './styles';
 
-import Card from '../Card';
-import MessageBar from '../MessageBar';
+import Card from '../CardComponent';
+import MessageBar from '../MessageBarComponent';
 
 export default function index({ horizontal, emptyMessage }) {
     const data = [{

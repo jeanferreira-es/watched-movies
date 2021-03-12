@@ -18,13 +18,13 @@ export const ConfigProvider = ({ children }) => {
 
     useEffect(() => {
         setTheme({
-            backgroundColor: darkMode ? colors.black : colors.gray,
+            backgroundColor: darkMode ? colors.black : colors.white,
             cardColor: darkMode ? colors.dracula : colors.white,
             textColor: darkMode ? colors.white : colors.black,
             subTextColor: darkMode ? colors.white50 : colors.black50,
-            iconColor: darkMode ? colors.white50 : colors.black50,
+            iconColor: darkMode ? colors.white50 : colors.dracula,
             barColor: darkMode ? colors.white25 : colors.black25,
-            statusBarColor: darkMode ? colors.black : colors.gray,
+            statusBarColor: darkMode ? colors.black : colors.white,
             statusBarStyle: darkMode ? 'light-content' : 'dark-content'
         });
     },[darkMode]);
