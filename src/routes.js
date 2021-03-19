@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
+import { connect } from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
 import colors from './styles/colors';
 
@@ -8,12 +9,9 @@ import colors from './styles/colors';
 import TabScreen from './pages/TabScreen';
 import SettingsScreen from './pages/SettingsScreen';
 
-import ConfigContext from './contexts/config';
-
 const Stack   = createStackNavigator();
 
-export default function Routes(){
-    const { theme } = useContext(ConfigContext);
+function Routes({ theme }){
 
     return (
         <NavigationContainer>
@@ -35,6 +33,7 @@ export default function Routes(){
                         headerTitleStyle: {
                             color: theme.textColor,
                         },
+                        headerTitleAlign: 'center',
                         headerTintColor: theme.textColor
                     }}
                 />
@@ -42,3 +41,5 @@ export default function Routes(){
         </NavigationContainer>
     )
 }
+
+export default connect(state => ({ theme: state.theme.theme}))(Routes);

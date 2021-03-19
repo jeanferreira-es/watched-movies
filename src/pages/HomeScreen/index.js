@@ -1,17 +1,18 @@
-import React, { useEffect, useContext } from 'react';
-import { Text, ScrollView } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, ScrollView, Dimensions } from 'react-native';
 import { Box, Container } from './styles';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
 import { Button } from '../../styles/general';
 import colors from '../../styles/colors';
+import { connect } from 'react-redux';
+import { increase, decrease } from '../../redux/actions/counterAction';
 
-import ConfigContext from '../../contexts/config';
-import List from '../../components/ListComponent';
 import Header from '../../components/HeaderComponent';
+import List from '../../components/ListComponent';
 
-function Title({ iconName, title, color }) {
-    const { theme } = useContext(ConfigContext);
+const { width, height } = Dimensions.get('window');
 
+function Title({ iconName, title, color, theme }) {
     return (
         <>
             <Box>
@@ -22,42 +23,52 @@ function Title({ iconName, title, color }) {
                     marginRight: 10,
                     }}
                 />
-                <Text style={{color: theme.textColor}}>{title}</Text>
+                <Text style={{ color: theme.textColor}}>{title}</Text>
             </Box>
             <Button>
-                <Text style={{color: theme.textColor}}>ver todos...</Text>
+                <Text style={{ color: theme.textColor }}>ver todos...</Text>
             </Button>
         </>
     )
 }
 
-export default function index({ navigation }){
-    const { theme } = useContext(ConfigContext);
+function index({ navigation, value, theme }){
+    useEffect(() => {
+        increase();
+        console.log(value);
+        console.log(width);
+        console.log(height);
+    },[]);
 
     return(
         <Container style={{ backgroundColor: theme.backgroundColor }}>
             <ScrollView style={{ paddingBottom: 100}}>
-            <Header navigation={navigation} showSearch='none'/>
+            <Header auxFunction={() => navigation.push('Settings')} showSearch='none' showPlus='none' iconAux='cog'/>
                 <Box main>
-                    <Title iconName='pause' title='Não finalizados' color={colors.yellow}/>
+                    <Title iconName='pause' title='Não finalizados' color={colors.yellow} theme={theme}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Não há nada na lista'/>
 
                 <Box main>
-                    <Title iconName='play' title='Não assistido' color={colors.blue}/>
+                    <Title iconName='play' title='Não assistido' color={colors.blue} theme={theme}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Nessa também não tem'/>
 
                 <Box main>
-                    <Title iconName='heart' title='Favoritos' color={colors.red}/>
+                    <Title iconName='heart' title='Favoritos' color={colors.red} theme={theme}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Nessa também não tem'/>
 
                 <Box main>
-                    <Title iconName='check' title='Assistidos' color={colors.green}/>
+                    <Title iconName='check' title='Assistidos' color={colors.green} theme={theme}/>
                 </Box>
                 <List horizontal={true} emptyMessage='Nessa também não tem'/>
             </ScrollView>
         </Container>
     )
 }
+
+export default connect(state => ({ 
+    value: state.counter.value, 
+    theme: state.theme.theme
+}))(index);

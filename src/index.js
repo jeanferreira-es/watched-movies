@@ -1,11 +1,12 @@
 import React from 'react';
 import Routes from './routes';
-import { ConfigProvider } from './contexts/config';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 export default function index(){
     return(
-        <ConfigProvider>
+        <Provider store={store}>
             <Routes/>
-        </ConfigProvider>
+        </Provider>
     )
 }

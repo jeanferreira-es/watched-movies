@@ -1,7 +1,10 @@
-import React, { useContext } from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import React from 'react';
+import { View, StyleSheet, StatusBar, Text } from 'react-native';
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; 
+import { connect } from 'react-redux';
+import colors from '../../styles/colors';
 
 //Importação das páginas 
 import HomeScreen from '../HomeScreen';
@@ -9,31 +12,39 @@ import MovieScreen from '../MovieScreen';
 import SerieScreen from '../SerieScreen';
 import SharedScreen from '../SharedScreen';
 
-import ConfigContext from '../../contexts/config';
+// const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
-const Tab = createMaterialBottomTabNavigator();
-
-export default function Routes(){
-    const { theme } = useContext(ConfigContext);
-
+function index({ theme }){
     return (
         <>
             <StatusBar barStyle={theme.statusBarStyle} backgroundColor={theme.statusBarColor}/>
                 <Tab.Navigator
                     initialRouteName='Home'
-                    activeColor='#FFF'
-                    barStyle={{
-                        backgroundColor: '#333842'
+                    tabBarOptions={{
+                        style: {
+                            backgroundColor: colors.darkDracula,
+                            elevation: 10,
+                            borderTopColor: colors.black
+                        },
+                        inactiveBackgroundColor: true,
+                        activeTintColor: colors.white,
+                        inactiveTintColor: colors.white25,
                     }}
+                    
                 >
                     <Tab.Screen 
                         name='Home' 
                         component={HomeScreen} 
                         options={{
-                            title: 'Home',
+                            title: 'Início',
+                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Início</Text>),
                             tabBarIcon: ({ focused }) => (
-                                <View style={styles.circle}>
-                                    <MaterialCommunityIcons name={focused ? 'play' : 'play-outline'} color={ focused ? '#D800FF' : 'rgba(250,250,250,0.5)'} size={ focused ? 26: 23}/>
+                                <View style={focused ? styles.circle : {}}>
+                                    <MaterialCommunityIcons 
+                                        name={focused ? 'play' : 'play-outline'} 
+                                        color={focused ? colors.purple : colors.lightPurple} 
+                                        size={focused ? 26: 23}/>
                                 </View>
                             )
                         }}
@@ -43,9 +54,13 @@ export default function Routes(){
                         component={MovieScreen}
                         options={{
                             title: 'Filmes',
+                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Filmes</Text>),
                             tabBarIcon: ({ focused }) => (
-                                <View style={styles.circle}>
-                                    <MaterialCommunityIcons name={focused ? 'movie-open' : 'movie-outline'} color={ focused ? '#D800FF' : 'rgba(250,250,250,0.5)'} size={ focused ? 26 : 23}/>
+                                <View style={focused ? styles.circle : {}}>
+                                    <MaterialCommunityIcons 
+                                        name={focused ? 'movie-open' : 'movie-outline'} 
+                                        color={focused ? colors.purple : colors.lightPurple} 
+                                        size={focused ? 26 : 23}/>
                                 </View>
                             )
                         }}
@@ -55,9 +70,13 @@ export default function Routes(){
                         component={SerieScreen}
                         options={{
                             title: 'Séries',
+                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Séries</Text>),
                             tabBarIcon: ({ focused }) => (
-                                <View style={styles.circle}>
-                                    <MaterialCommunityIcons name='movie-roll' color={ focused ? '#D800FF' : 'rgba(250,250,250,0.5)'} size={ focused ? 26: 23}/>
+                                <View style={focused ? styles.circle : {}}>
+                                    <MaterialCommunityIcons 
+                                        name='movie-roll' 
+                                        color={focused ? colors.purple : colors.lightPurple} 
+                                        size={focused ? 26: 23}/>
                                 </View>
                             )
                         }}
@@ -67,9 +86,13 @@ export default function Routes(){
                         component={SharedScreen}
                         options={{
                             title: 'Indicados',
+                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Indicados</Text>),
                             tabBarIcon: ({ focused }) => (
-                                <View style={styles.circle}>
-                                    <MaterialCommunityIcons name={ focused ? 'play-box-multiple' : 'play-box-multiple-outline'} color={ focused ? '#D800FF' : 'rgba(250,250,250,0.5)'} size={ focused ? 26: 23}/>
+                                <View style={focused ? styles.circle : {}}>
+                                    <MaterialCommunityIcons 
+                                        name={focused ? 'play-box-multiple' : 'play-box-multiple-outline'} 
+                                        color={focused ? colors.purple : colors.lightPurple} 
+                                        size={focused ? 26: 23}/>
                                 </View>
                             )
                         }}
@@ -81,17 +104,18 @@ export default function Routes(){
 
 const styles = StyleSheet.create({
     circle: {
-        // width: 50,
-        // height: 50,
-        justifyContent: 'center',
+        width: 50,
+        height: 50,
+        position: 'absolute',
         alignItems: 'center',
-        // borderRadius: 50,
-        // backgroundColor: '#FFF',
-        // elevation: 4,
-        // top: -20
-    },
-
-    icon: {
-        paddingHorizontal: 5,
+        justifyContent: 'center',
+        backgroundColor: '#333842',
+        borderRadius: 50,
+        elevation: 4,
+        top: -26,
     }
 });
+
+export default connect(state => ({
+    theme: state.theme.theme
+}))(index);

@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Container } from './styles';
-import { Button } from '../../styles/general';
+import { Button, Box } from '../../styles/general';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { connect } from 'react-redux';
 
-import ConfigContext from '../../contexts/config';
-
-export default function index({ navigation, showSearch }) {
-    const { theme } = useContext(ConfigContext);
+function index({ theme, navigation, showSearch, showAux, showPlus, iconAux, auxFunction, searchFunction, plusFunction }) {
 
     return(
         <Container style={{ flexDirection: showSearch == 'none' ? 'row-reverse' : 'row' }}>
@@ -18,9 +16,37 @@ export default function index({ navigation, showSearch }) {
             >
                 <MaterialCommunityIcons name='magnify' color={theme.backgroundColor} size={15}/>
             </Button>
-            <Button onPress={() => navigation.push('Settings')}>
-                <MaterialCommunityIcons name='cog' color={theme.iconColor} size={30}/>
-            </Button>
+
+            <Box row>
+                <Button round 
+                    onPress={() => auxFunction()}
+                    style={ iconAux == 'cog' ? {} : { 
+                        backgroundColor: theme.iconColor, 
+                        display: showAux,
+                        marginLeft: 8,
+                    }}
+                >
+                    <MaterialCommunityIcons 
+                        name={iconAux} 
+                        color={iconAux == 'cog' ? theme.iconColor : theme.backgroundColor} 
+                        size={iconAux == 'cog' ? 30 : 15}
+                    />
+                </Button>
+                
+                <Button round 
+                    style={{ 
+                        backgroundColor: theme.iconColor, 
+                        display: showPlus,
+                        marginLeft: 8,
+                    }}
+                >
+                    <MaterialCommunityIcons name='plus' color={theme.backgroundColor} size={15}/>
+                </Button>
+            </Box>
         </Container>
     )
 }
+
+export default connect( state => ({
+    theme: state.theme.theme
+}))(index);

@@ -1,16 +1,20 @@
-import React, { useEffect, useContext } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
 import { Container } from './styles';
+import { connect } from 'react-redux';
 
-import ConfigContext, { ConfigProvider } from '../../contexts/config';
+import Header from '../../components/HeaderComponent';
+import List from '../../components/ListComponent';
 
-export default function index(){
-    const { theme } = useContext(ConfigContext);
-
+function index({ theme, navigation }){
 
     return(
         <Container style={{ backgroundColor: theme.backgroundColor }}>
-            <Text>Movie Screen</Text>
+            <Header navigation={navigation} showSearch='flex' showPlus='flex' iconAux='filter-variant'/>
+            <List horizontal={false} emptyMessage='Não há nenhum filme'/>
         </Container>
     )
 }
+
+export default connect( state => ({
+    theme: state.theme.theme
+}))(index);

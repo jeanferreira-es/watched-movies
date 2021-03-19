@@ -9,6 +9,7 @@ const colors = {
     dracula: '#313439',
     darkDracula: '#333842',
     purple: '#D800FF',
+    lightPurple: '#8682AB',
     green: '#41C64E',
     yellow: '#E5D32E',
     blue: '#00D8D6',

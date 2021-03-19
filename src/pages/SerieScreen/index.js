@@ -1,15 +1,20 @@
-import React, { useContext } from 'react';
-import { Text } from 'react-native';
+import React from 'react';
 import { Container } from './styles';
+import { connect } from 'react-redux';
 
-import ConfigContext from '../../contexts/config';
+import Header from '../../components/HeaderComponent';
+import List from '../../components/ListComponent';
 
-export default function index(){
-    const { theme } = useContext(ConfigContext);
+function index({ theme }){
 
     return(
-        <Container style={{ backgroundColor: theme.backgroundColor}}>
-            <Text>Series Screen</Text>
+        <Container style={{ backgroundColor: theme.backgroundColor }}>
+            <Header showSearch='flex' showPlus='flex' iconAux='filter-variant'/>
+            <List horizontal={false} emptyMessage='Não há nenhuma série'/>
         </Container>
     )
 }
+
+export default connect(state => ({
+    theme: state.theme.theme
+}))(index);

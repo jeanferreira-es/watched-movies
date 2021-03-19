@@ -1,12 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { Box, Container } from './styles';
 import { Text } from '../../styles/general';
+import { connect } from 'react-redux';
 
-import ConfigContext from '../../contexts/config';
-
-export default function index({ movie }) {
-    const { theme } = useContext(ConfigContext);
-
+function index({ movie, theme }) {
     return(
         <Container style={{ backgroundColor: theme.cardColor}}>
             <Box capa>
@@ -18,3 +15,7 @@ export default function index({ movie }) {
         </Container>
     )
 }
+
+export default connect(state => ({
+    theme: state.theme.theme
+}))(index);
