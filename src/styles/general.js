@@ -1,7 +1,19 @@
 import styled, { css } from 'styled-components/native';
 
 export const Text = styled.Text`
-    
+    text-align: justify;
+
+    ${props => props.bold && css`
+        font-weight: bold;
+    `}
+
+    ${props => props.small && css`
+        font-size: 12px;
+    `}
+
+    ${props => props.mTop && css`
+        margin-top: 10px;
+    `}
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -9,9 +21,10 @@ export const Button = styled.TouchableOpacity`
     justify-content: center;
 
     ${props => props.round && css`
-        width: 30px;
-        height: 30px;
+        width: 38px;
+        height: 38px;
         border-radius: 20px;
+        /* elevation: 5; */
     `}
 `;
 

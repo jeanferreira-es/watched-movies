@@ -5,8 +5,8 @@ const { width, height } = Dimensions.get('window');
 const metrics = {
     smallMargin: 5,
     baseMargin: 10,
-    baseRadius: 5,
-    baseElevation: 3,
+    baseRadius: 10,
+    baseElevation: 9,
     doubleBaseMargin: 20,
     screenWidth: width < height ? width : height,
     screenHeight: width < height ? height : width,

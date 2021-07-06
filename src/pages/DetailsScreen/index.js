@@ -1,11 +1,16 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { Container } from './styles';
+import { connect } from 'react-redux';
 
-export default function index(){
+function index({ theme }){
     return(
-        <Container>
+        <Container style={{ backgroundColor: theme.backgroundColor}}>
             <Text>Details Screen</Text>
         </Container>
     )
 }
+
+export default connect( state => ({
+    theme: state.theme.theme
+}))(index);

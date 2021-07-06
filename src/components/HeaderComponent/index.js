@@ -1,21 +1,43 @@
-import React from 'react';
-import { Container } from './styles';
+import React, { useState } from 'react';
+import { Container, SearchBox, Input } from './styles';
 import { Button, Box } from '../../styles/general';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 
-function index({ theme, navigation, showSearch, showAux, showPlus, iconAux, auxFunction, searchFunction, plusFunction }) {
+function index({ theme, navigation, text, setText, showSearch, showAux, showPlus, iconAux, auxFunction, searchFunction, plusFunction }) {
+    const [searchClicked, setSearchClicked] = useState(false);
+
+    function clear(){
+        setText('');
+        setSearchClicked(false);
+    }
 
     return(
         <Container style={{ flexDirection: showSearch == 'none' ? 'row-reverse' : 'row' }}>
-            <Button round 
-                style={{ 
-                    backgroundColor: theme.iconColor, 
-                    display: showSearch 
-                }}
-            >
-                <MaterialCommunityIcons name='magnify' color={theme.backgroundColor} size={15}/>
-            </Button>
+            <SearchBox>
+                <Button round
+                    onPress={() => { if(searchClicked) clear() }}
+                    style={{
+                        backgroundColor: theme.iconColor, 
+                        display: showSearch,
+                        borderTopRightRadius: 0,
+                        borderBottomRightRadius: 0,
+                        right: -0.4
+                    }}
+                >
+                    <MaterialCommunityIcons name={ searchClicked ? 'close' : 'magnify'} color={theme.backgroundColor} size={20}/>
+                </Button>
+
+                <Input 
+                    value={text}
+                    onChangeText={(text) => {setText(text); setSearchClicked(true)}}
+                    style={{ 
+                        backgroundColor: theme.iconColor, 
+                        display: showSearch, 
+                        color: '#FFF'
+                    }} 
+                />
+            </SearchBox>
 
             <Box row>
                 <Button round 
@@ -29,7 +51,7 @@ function index({ theme, navigation, showSearch, showAux, showPlus, iconAux, auxF
                     <MaterialCommunityIcons 
                         name={iconAux} 
                         color={iconAux == 'cog' ? theme.iconColor : theme.backgroundColor} 
-                        size={iconAux == 'cog' ? 30 : 15}
+                        size={iconAux == 'cog' ? 30 : 20}
                     />
                 </Button>
                 
@@ -40,7 +62,7 @@ function index({ theme, navigation, showSearch, showAux, showPlus, iconAux, auxF
                         marginLeft: 8,
                     }}
                 >
-                    <MaterialCommunityIcons name='plus' color={theme.backgroundColor} size={15}/>
+                    <MaterialCommunityIcons name='plus' color={theme.backgroundColor} size={20}/>
                 </Button>
             </Box>
         </Container>

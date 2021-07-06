@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components/native';
+import { Dimensions } from 'react-native';
 import metrics from '../../styles/metrics';
 
+const { width, height } = Dimensions.get('window');
+
 export const Container = styled.View`
-    /* background-color: #888; */
     border-radius: ${metrics.baseRadius}px;
     flex-direction: row;
-    width: 300px;
+    width: ${ width < 500 ? '94%' : '330px'};
     height: 160px;
-    /* margin-right: 25px; */
     elevation: ${metrics.baseElevation};
     margin: ${metrics.baseMargin}px;
 `;
@@ -15,13 +16,14 @@ export const Container = styled.View`
 export const Box = styled.View`
 
     ${props => props.capa && css`
-        width: 100px;
+        width: 107.5px;
         background-color: #7632;
         border-bottom-left-radius: ${metrics.baseRadius}px;
         border-top-left-radius: ${metrics.baseRadius}px;
     `}
     
     ${props => props.details && css`
-        padding: 10px;
+        padding: 10px 15px;
+        flex: 1;
     `}
 `;

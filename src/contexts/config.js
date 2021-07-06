@@ -13,7 +13,7 @@ export const ConfigProvider = ({ children }) => {
     const [theme, setTheme] = useState({});
 
     useEffect(() => {
-        setDarkMode(false);
+        // setDarkMode(false);
     },[]);
 
     useEffect(() => {
@@ -21,6 +21,9 @@ export const ConfigProvider = ({ children }) => {
             backgroundColor: darkMode ? colors.black : colors.white,
             cardColor: darkMode ? colors.dracula : colors.white,
             textColor: darkMode ? colors.white : colors.black,
+            inputTextColor: darkMode ? colors.black : colors.white,
+            opaqueColor: darkMode ? colors.white25 : colors.black25,
+            opaqueText: darkMode ? colors.white25 : colors.black25, 
             subTextColor: darkMode ? colors.white50 : colors.black50,
             iconColor: darkMode ? colors.white50 : colors.dracula,
             barColor: darkMode ? colors.white25 : colors.black25,

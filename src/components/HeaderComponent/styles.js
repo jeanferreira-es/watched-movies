@@ -2,8 +2,24 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
     flex-direction: row;
-    /* background-color: #577483; */
     align-items: center;
     justify-content: space-between;
     padding: 25px;
 `;
+
+export const SearchBox = styled.View`
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+`
+
+export const Input = styled.TextInput`
+    flex: 1;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+    height: 38px;
+    /* padding-left: 15px; */
+    /* elevation: 5; */
+`

@@ -8,6 +8,7 @@ import colors from './styles/colors';
 //Importação das páginas 
 import TabScreen from './pages/TabScreen';
 import SettingsScreen from './pages/SettingsScreen';
+import DetailsScreen from './pages/DetailsScreen';
 
 const Stack   = createStackNavigator();
 
@@ -30,6 +31,17 @@ function Routes({ theme }){
                     options={{
                         headerShown: true,
                         headerTitle: 'Configurações',
+                        headerTitleStyle: {
+                            color: theme.textColor,
+                        },
+                        headerTitleAlign: 'center',
+                        headerTintColor: theme.textColor
+                    }}
+                />
+                <Stack.Screen name='Details' component={DetailsScreen} 
+                    options={{
+                        headerShown: true,
+                        headerTitle: 'Detalhes',
                         headerTitleStyle: {
                             color: theme.textColor,
                         },
