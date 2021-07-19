@@ -19,7 +19,18 @@ export default function index(){
                 language: 'pt-BR'
             }});
 
-            await AsyncStorage.setItem('@genres_key', JSON.stringify(response.data.genres));
+            await AsyncStorage.setItem('@genres_movie', JSON.stringify(response.data.genres));
+        } catch (error) {
+            
+        }
+
+        try {
+            const response = await api.get('/genre/tv/list', { params: {
+                api_key: '8ce31ab8a7283e6a6e8f3d35c0d2e6d0',
+                language: 'pt-BR'
+            }});
+
+            await AsyncStorage.setItem('@genres_serie', JSON.stringify(response.data.genres));
         } catch (error) {
             
         }

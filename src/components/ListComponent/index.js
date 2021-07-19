@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, ActivityIndicator } from 'react-native';
 import { FlatList } from 'react-native';
 import { Container } from './styles';
 
@@ -8,7 +8,8 @@ import MessageBar from '../MessageBarComponent';
 
 const { width, height } = Dimensions.get('window');
 
-export default function index({ horizontal, emptyMessage, data, navigation }) {
+export default function index({ horizontal, emptyMessage, data, navigation, loading, page, setPage, type }) {
+
     // const data = [{
     //     adult: false,
     //     backdrop_path: "/fev8UFNFFYsD5q7AcYS8LyTzqwl.jpg",
@@ -81,16 +82,18 @@ export default function index({ horizontal, emptyMessage, data, navigation }) {
     return (
         <Container>
             <FlatList
+                key={type == 'movie' ? 1 : 2}
                 data={data}
                 keyExtractor={movie => String(movie.id)}
-                ListEmptyComponent={() => <MessageBar message={emptyMessage} />}
                 ListHeaderComponent={() => (<></>)}
+                ListFooterComponent={() => <ActivityIndicator size='large' color='#B39DDB'/>}
+                ListEmptyComponent={() => <MessageBar message={emptyMessage} />}
                 renderItem={ ({ item : movie }) => (
-                    <Card movie={movie} navigation={navigation}/>
+                    <Card movie={movie} navigation={navigation} type={type}/>
                 )}
-                numColumns={width < 500 ? null : 2}
                 horizontal={width < 500 ? horizontal : null}
                 showsHorizontalScrollIndicator={false}
+                numColumns={width < 500 ? null : 2}
                 scrollEnabled={true}
                 // refreshing={}
                 // onRefresh={}
@@ -99,9 +102,15 @@ export default function index({ horizontal, emptyMessage, data, navigation }) {
                     paddingVertical: 10,
                     width: '100%',
                 }}
+                ListFooterComponentStyle={{
+                    display: loading && data != '' ? 'flex' : 'none',
+                    top: -50,
+                }}
                 columnWrapperStyle={width < 500 ? null : {
                     justifyContent: 'center'
                 }}
+                onEndReachedThreshold={0.2}
+                onEndReached={() => setPage(page+1)}
             />
         </Container>
     )

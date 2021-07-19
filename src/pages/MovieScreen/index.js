@@ -7,33 +7,65 @@ import Header from '../../components/HeaderComponent';
 import List from '../../components/ListComponent';
 
 function index({ theme, navigation }){
-    const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
     const [text, setText] = useState('');
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        listMovies();
+        if(text === ''){
+            setData([]);
+            return;
+        }
+        listMovies([]);
     },[text]);
 
-    async function listMovies(){
+    useEffect(() => {
+        listMovies(data);
+    },[page]);
+
+    async function listMovies(arr){
+        if(loading) return;
+        
+        setLoading(true);
         try {
             const response = await api.get('/search/movie', { params: {
                 api_key: '8ce31ab8a7283e6a6e8f3d35c0d2e6d0',
                 query: text,
                 language: 'pt-BR',
-                page: 1,
+                page,
                 include_adult: false
             }});
 
-            setData(response.data.results);
+            setData([...arr,...response.data.results]);
         } catch (error) {
             
+        } finally{
+            setLoading(false);
         }
     }
 
     return(
         <Container style={{ backgroundColor: theme.backgroundColor }}>
-            <Header navigation={navigation} text={text} setText={setText} showSearch='flex' showPlus='flex' iconAux='filter-variant'/>
-            <List horizontal={false} emptyMessage='Não há nenhum filme' data={data} navigation={navigation}/>
+            <Header 
+                text={text} 
+                showPlus='flex' 
+                showSearch='flex' 
+                setText={setText} 
+                navigation={navigation} 
+                iconAux='filter-variant'
+            />
+
+            <List 
+                data={data} 
+                page={page}
+                type='movie'
+                loading={loading} 
+                setPage={setPage}
+                horizontal={false} 
+                navigation={navigation} 
+                emptyMessage='Não há nenhum filme' 
+            />
         </Container>
     )
 }

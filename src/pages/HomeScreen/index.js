@@ -35,9 +35,9 @@ function Title({ iconName, title, color, theme }) {
 function index({ navigation, value, theme }){
     useEffect(() => {
         increase();
-        console.log(value);
-        console.log(width);
-        console.log(height);
+        // console.log(value);
+        // console.log(width);
+        // console.log(height);
     },[]);
 
     return(

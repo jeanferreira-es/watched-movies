@@ -16,8 +16,8 @@ export const Container = styled.View`
 export const Box = styled.View`
 
     ${props => props.capa && css`
-        width: 107.5px;
-        background-color: #7632;
+        width: 107px;
+        background-color: #EDE7F5;
         border-bottom-left-radius: ${metrics.baseRadius}px;
         border-top-left-radius: ${metrics.baseRadius}px;
     `}

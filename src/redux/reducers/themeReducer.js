@@ -10,7 +10,7 @@ const INITIAL_STATE = {
         inputTextColor: colors.black,
         opaqueColor: colors.black25,
         opaqueText: colors.black25,
-        iconColor: colors.dracula,
+        iconColor: colors.darkDracula,
         barColor: colors.black25,
         statusBarColor: colors.white,
         statusBarStyle: 'dark-content'
@@ -24,7 +24,7 @@ export default function themeReducer(state = INITIAL_STATE, action) {
             theme: {
                 backgroundColor: action.darkMode ? colors.black : colors.white,
                 cardColor: action.darkMode ? colors.dracula : colors.white,
-                textColor: action.darkMode ? colors.white : colors.black,
+                textColor: action.darkMode ? colors.white : colors.darkDracula,
                 inputTextColor: action.darkMode ? colors.black : colors.white,
                 opaqueColor: action.darkMode ? colors.white25 : colors.black25,
                 opaqueText: action.darkMode ? colors.white25 : colors.black25, 

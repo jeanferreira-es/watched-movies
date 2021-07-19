@@ -25,7 +25,7 @@ export const ConfigProvider = ({ children }) => {
             opaqueColor: darkMode ? colors.white25 : colors.black25,
             opaqueText: darkMode ? colors.white25 : colors.black25, 
             subTextColor: darkMode ? colors.white50 : colors.black50,
-            iconColor: darkMode ? colors.white50 : colors.dracula,
+            iconColor: darkMode ? colors.white50 : colors.darkDracula,
             barColor: darkMode ? colors.white25 : colors.black25,
             statusBarColor: darkMode ? colors.black : colors.white,
             statusBarStyle: darkMode ? 'light-content' : 'dark-content'

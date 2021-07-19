@@ -6,16 +6,15 @@ import metrics from '../../styles/metrics';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function index({ movie, theme, navigation }) {
+function index({ movie, theme, navigation, type }) {
     const [genres, setGenres] = useState([]);
 
     useEffect(() => {
-        console.log(movie);
         checkGenre();
     },[]);
 
     async function checkGenre(){
-        const all = JSON.parse(await AsyncStorage.getItem('@genres_key'));
+        const all = JSON.parse(await AsyncStorage.getItem('@genres_'+type));
         const movieGenres = movie.genre_ids;
         let i = 0;
 
@@ -30,7 +29,7 @@ function index({ movie, theme, navigation }) {
     }
 
     return(
-        <TouchableWithoutFeedback onPress={() => navigation.push('Details')}>
+        <TouchableWithoutFeedback onPress={() => navigation.push('Details', movie)}>
             <Container style={{ backgroundColor: theme.cardColor}}>
                 <Box capa>
                     <Image 
@@ -39,13 +38,13 @@ function index({ movie, theme, navigation }) {
                         style={{
                             width: '100%',
                             height: '100%',
-                            borderBottomLeftRadius: metrics.baseRadius,
-                            borderTopLeftRadius: metrics.baseRadius
+                            borderBottomLeftRadius: metrics.baseRadius-3,
+                            borderTopLeftRadius: metrics.baseRadius-3
                         }}
                     />
                 </Box>
                 <Box details>
-                    <Text bold style={{ color: theme.textColor }}>{movie.title}</Text>
+                    <Text bold style={{ color: theme.textColor }}>{type == 'movie' ? movie.title : movie.name}</Text>
                     <Text>
                         {genres.map((item, index) => {
                             if(index == genres.length-1){
@@ -60,7 +59,7 @@ function index({ movie, theme, navigation }) {
                         })
                         }
                     </Text>
-                    <Text mTop numberOfLines={5} style={{ color: theme.textColor }}>{String(movie.overview).length ? movie.overview : "A descrição deste filme não está disponível."}</Text>
+                    <Text mTop numberOfLines={5} style={{ color: theme.textColor }}>{String(movie.overview).length ? movie.overview : "A descrição não está disponível."}</Text>
                 </Box>
             </Container>
         </TouchableWithoutFeedback>

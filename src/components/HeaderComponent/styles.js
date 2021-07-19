@@ -13,7 +13,9 @@ export const SearchBox = styled.View`
     align-items: center;
 `
 
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs(props => ({
+    selectionColor: '#D1C4E9',
+  }))`
     flex: 1;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;

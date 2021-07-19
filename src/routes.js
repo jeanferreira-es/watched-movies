@@ -41,7 +41,7 @@ function Routes({ theme }){
                 <Stack.Screen name='Details' component={DetailsScreen} 
                     options={{
                         headerShown: true,
-                        headerTitle: 'Detalhes',
+                        // headerTitle: 'Detalhes',
                         headerTitleStyle: {
                             color: theme.textColor,
                         },

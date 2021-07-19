@@ -34,7 +34,7 @@ function index({ theme, navigation, text, setText, showSearch, showAux, showPlus
                     style={{ 
                         backgroundColor: theme.iconColor, 
                         display: showSearch, 
-                        color: '#FFF'
+                        color: theme.statusBarColor
                     }} 
                 />
             </SearchBox>

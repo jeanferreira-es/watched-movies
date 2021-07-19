@@ -19,85 +19,85 @@ function index({ theme }){
     return (
         <>
             <StatusBar barStyle={theme.statusBarStyle} backgroundColor={theme.statusBarColor}/>
-                <Tab.Navigator
-                    initialRouteName='Home'
-                    tabBarOptions={{
-                        style: {
-                            backgroundColor: colors.darkDracula,
-                            elevation: 10,
-                            borderTopColor: colors.black
-                        },
-                        inactiveBackgroundColor: true,
-                        activeTintColor: colors.white,
-                        inactiveTintColor: colors.white25,
+            <Tab.Navigator
+                initialRouteName='Home'
+                tabBarOptions={{
+                    style: {
+                        backgroundColor: colors.darkDracula,
+                        elevation: 10,
+                        borderTopColor: colors.black
+                    },
+                    inactiveBackgroundColor: true,
+                    activeTintColor: colors.white,
+                    inactiveTintColor: colors.white25,
+                }}
+                
+            >
+                <Tab.Screen 
+                    name='Home' 
+                    component={HomeScreen} 
+                    options={{
+                        title: 'Início',
+                        // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Início</Text>),
+                        tabBarIcon: ({ focused }) => (
+                            <View style={focused ? styles.circle : {}}>
+                                <MaterialCommunityIcons 
+                                    name={focused ? 'play' : 'play-outline'} 
+                                    color={focused ? colors.purple : colors.lightPurple} 
+                                    size={focused ? 26: 23}/>
+                            </View>
+                        )
                     }}
-                    
-                >
-                    <Tab.Screen 
-                        name='Home' 
-                        component={HomeScreen} 
-                        options={{
-                            title: 'Início',
-                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Início</Text>),
-                            tabBarIcon: ({ focused }) => (
-                                <View style={focused ? styles.circle : {}}>
-                                    <MaterialCommunityIcons 
-                                        name={focused ? 'play' : 'play-outline'} 
-                                        color={focused ? colors.purple : colors.lightPurple} 
-                                        size={focused ? 26: 23}/>
-                                </View>
-                            )
-                        }}
-                    />
-                    <Tab.Screen 
-                        name='Movies' 
-                        component={MovieScreen}
-                        options={{
-                            title: 'Filmes',
-                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Filmes</Text>),
-                            tabBarIcon: ({ focused }) => (
-                                <View style={focused ? styles.circle : {}}>
-                                    <MaterialCommunityIcons 
-                                        name={focused ? 'movie-open' : 'movie-outline'} 
-                                        color={focused ? colors.purple : colors.lightPurple} 
-                                        size={focused ? 26 : 23}/>
-                                </View>
-                            )
-                        }}
-                    />
-                    <Tab.Screen 
-                        name='Series' 
-                        component={SerieScreen}
-                        options={{
-                            title: 'Séries',
-                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Séries</Text>),
-                            tabBarIcon: ({ focused }) => (
-                                <View style={focused ? styles.circle : {}}>
-                                    <MaterialCommunityIcons 
-                                        name='movie-roll' 
-                                        color={focused ? colors.purple : colors.lightPurple} 
-                                        size={focused ? 26: 23}/>
-                                </View>
-                            )
-                        }}
-                    />
-                    <Tab.Screen 
-                        name='Shared' 
-                        component={SharedScreen}
-                        options={{
-                            title: 'Indicados',
-                            // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Indicados</Text>),
-                            tabBarIcon: ({ focused }) => (
-                                <View style={focused ? styles.circle : {}}>
-                                    <MaterialCommunityIcons 
-                                        name={focused ? 'play-box-multiple' : 'play-box-multiple-outline'} 
-                                        color={focused ? colors.purple : colors.lightPurple} 
-                                        size={focused ? 26: 23}/>
-                                </View>
-                            )
-                        }}
-                    />
-                </Tab.Navigator>
+                />
+                <Tab.Screen 
+                    name='Movies' 
+                    component={MovieScreen}
+                    options={{
+                        title: 'Filmes',
+                        // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Filmes</Text>),
+                        tabBarIcon: ({ focused }) => (
+                            <View style={focused ? styles.circle : {}}>
+                                <MaterialCommunityIcons 
+                                    name={focused ? 'movie-open' : 'movie-outline'} 
+                                    color={focused ? colors.purple : colors.lightPurple} 
+                                    size={focused ? 26 : 23}/>
+                            </View>
+                        )
+                    }}
+                />
+                <Tab.Screen 
+                    name='Series' 
+                    component={SerieScreen}
+                    options={{
+                        title: 'Séries',
+                        // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Séries</Text>),
+                        tabBarIcon: ({ focused }) => (
+                            <View style={focused ? styles.circle : {}}>
+                                <MaterialCommunityIcons 
+                                    name='movie-roll' 
+                                    color={focused ? colors.purple : colors.lightPurple} 
+                                    size={focused ? 26: 23}/>
+                            </View>
+                        )
+                    }}
+                />
+                <Tab.Screen 
+                    name='Shared' 
+                    component={SharedScreen}
+                    options={{
+                        title: 'Indicados',
+                        // tabBarLabel: ({ focused }) => (<Text style={{ display: focused ? 'flex' : 'none', color: colors.white, fontSize: 12}}>Indicados</Text>),
+                        tabBarIcon: ({ focused }) => (
+                            <View style={focused ? styles.circle : {}}>
+                                <MaterialCommunityIcons 
+                                    name={focused ? 'play-box-multiple' : 'play-box-multiple-outline'} 
+                                    color={focused ? colors.purple : colors.lightPurple} 
+                                    size={focused ? 26: 23}/>
+                            </View>
+                        )
+                    }}
+                />
+            </Tab.Navigator>
         </>
     )
 }
