@@ -35,18 +35,18 @@ function Routes({ theme }){
                             color: theme.textColor,
                         },
                         headerTitleAlign: 'center',
-                        headerTintColor: theme.textColor
+                        headerTintColor: theme.textColor,
                     }}
                 />
                 <Stack.Screen name='Details' component={DetailsScreen} 
                     options={{
                         headerShown: true,
-                        // headerTitle: 'Detalhes',
                         headerTitleStyle: {
                             color: theme.textColor,
+                            fontWeight: 'bold',
                         },
                         headerTitleAlign: 'center',
-                        headerTintColor: theme.textColor
+                        headerTintColor: theme.textColor,
                     }}
                 />
             </Stack.Navigator>

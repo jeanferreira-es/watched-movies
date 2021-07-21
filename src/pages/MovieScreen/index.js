@@ -25,7 +25,7 @@ function index({ theme, navigation }){
     },[page]);
 
     async function listMovies(arr){
-        if(loading) return;
+        if(loading || text == '') return;
         
         setLoading(true);
         try {

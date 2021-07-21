@@ -82,14 +82,13 @@ export default function index({ horizontal, emptyMessage, data, navigation, load
     return (
         <Container>
             <FlatList
-                key={type == 'movie' ? 1 : 2}
                 data={data}
                 keyExtractor={movie => String(movie.id)}
-                ListHeaderComponent={() => (<></>)}
+                ListHeaderComponent={() => (<ActivityIndicator size='large' color='#B39DDB'/>)}
                 ListFooterComponent={() => <ActivityIndicator size='large' color='#B39DDB'/>}
-                ListEmptyComponent={() => <MessageBar message={emptyMessage} />}
+                ListEmptyComponent={() => <MessageBar message={emptyMessage} style={{ display: loading ? 'none' : 'flex'}}/>}
                 renderItem={ ({ item : movie }) => (
-                    <Card movie={movie} navigation={navigation} type={type}/>
+                    <Card key={movie.id} movie={movie} navigation={navigation} type={type}/>
                 )}
                 horizontal={width < 500 ? horizontal : null}
                 showsHorizontalScrollIndicator={false}
@@ -101,6 +100,9 @@ export default function index({ horizontal, emptyMessage, data, navigation, load
                     paddingHorizontal: 20,
                     paddingVertical: 10,
                     width: '100%',
+                }}
+                ListHeaderComponentStyle={{
+                    display: loading ? 'flex' : 'none',
                 }}
                 ListFooterComponentStyle={{
                     display: loading && data != '' ? 'flex' : 'none',
