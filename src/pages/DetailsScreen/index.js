@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, StatusBar } from 'react-native';
-import { Text } from '../../styles/general';
+import { Image, ImageBackground, StatusBar, Dimensions } from 'react-native';
+import { Text, Box } from '../../styles/general';
 import { Container } from './styles';
 import { connect } from 'react-redux';
+
+const { width, height } = Dimensions.get('window');
 
 function index({ theme, navigation, route }){
     const [data, setData] = useState(route.params.movie);
@@ -28,47 +30,80 @@ function index({ theme, navigation, route }){
         <ImageBackground 
             source={{uri: 'https://image.tmdb.org/t/p/w220_and_h330_face/'+data.poster_path}} 
             resizeMode='cover'
-            blurRadius={10}        
+            blurRadius={4}        
             style={{ 
                 flex: 1, 
                 justifyContent: 'center',
             }}
         >
             <Container>
-
                 <Text style={{ color: color }}>
                     <Text bold>Título original: </Text>
                     {route.params.type == 'movie' ? data.original_title : data.original_name}
                 </Text>
 
-                <Text style={{ color: color }}>
-                    <Text bold>Ano: </Text>
-                    {route.params.type == 'movie' ? data.release_date : data.first_air_date}
-                </Text>
+                <Box row>
+                    <Box spaceAround style={{ height: 240 }}>
+                        <Text style={{ color: color }}>
+                            <Text bold>Ano: </Text>
+                            {route.params.type == 'movie' ? data.release_date : data.first_air_date}
+                        </Text>
 
-                <Text style={{ color: color }}>
-                    <Text bold>Gênero: </Text>
-                    <Text>
-                        {genres.map((item, index) => {
-                            if(index == genres.length-1){
-                                return(
-                                    <Text style={{ color: color }}>{item.name}.</Text>
-                                    )
-                                } else {
-                                    return(
-                                        <Text style={{ color: color }}>{item.name}, </Text>
-                                        )
+                        <Text style={{ color: color }}>
+                            <Text bold>Gênero: </Text>
+                            <Text>
+                                {genres.map((item, index) => {
+                                    if(index == genres.length-1){
+                                        return(
+                                            <Text style={{ color: color }}>{item.name}.</Text>
+                                            )
+                                        } else {
+                                            return(
+                                                <Text style={{ color: color }}>{item.name}, </Text>
+                                                )
+                                            }
+                                        })
                                     }
-                                })
-                            }
-                    </Text>
-                </Text>
+                            </Text>
+                        </Text>
 
-                <Text style={{ color: color }}>
-                    <Text bold>Duração: </Text>
-                    {}
-                </Text>
+                        <Text style={{ color: color }}>
+                            <Text bold>Duração: </Text>
+                            {}
+                        </Text>
 
+                        <Text style={{ color: color }}>
+                            <Text bold>Popularidade: </Text>
+                            {data.popularity}%
+                        </Text>
+
+                        <Text style={{ color: color }}>
+                            <Text bold>Pontuação: </Text>
+                            {data.vote_average}
+                        </Text>
+
+                    </Box>
+
+                    <Box style={{
+                        flex: 1,
+                        alignItems: 'flex-end',
+                        justifyContent: 'center',
+                        paddingLeft: 40,
+                        paddingVertical: 15
+                    }}>
+                        <Image source={{ uri: 'https://image.tmdb.org/t/p/w220_and_h330_face/'+data.poster_path}}   
+                            resizeMode='cover'
+                            width={width/2}
+                            height={100}
+                            style={{
+                                width: "100%",
+                                height: 240,
+                                borderRadius: 4
+                            }}
+                        />
+                    </Box>
+                </Box>
+                
                 <Text style={{ color: color }}>
                     <Text bold>Resumo: </Text>
                     {data.overview}

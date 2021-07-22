@@ -38,4 +38,9 @@ export const Box = styled.View`
     ${props => props.spaceBetween && css`
         justify-content: space-between;
     `}
+
+    ${props => props.spaceAround && css`
+        align-content: space-around;
+        justify-content: space-around;
+    `}
 `

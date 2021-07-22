@@ -25,7 +25,7 @@ function index({ movie, theme, navigation, type }) {
         const colors = await ImageColors.getColors(imgURL,{
             fallback: '#999',
             cache: false,
-            key: 1
+            key: movie.id+1
         });
 
         const textColor = await (getLight(colors.average) >= 127.5 ? (getLight(colors.darkMuted) >= 127.5 ? '#444' : colors.darkMuted) : (getLight(colors.lightMuted) < 127.5 ? '#FFF' : colors.lightMuted));
